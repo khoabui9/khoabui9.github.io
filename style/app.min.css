@@ -113,6 +113,7 @@ p {
 }
 
 .visit {
+    text-decoration: line-through;
     color: #22264b;
     font-size: 20px;
     padding-left: 5px;
