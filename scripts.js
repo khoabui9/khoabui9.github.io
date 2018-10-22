@@ -325,7 +325,7 @@ function aboutButton() {
         setTimeout(() => {
             anc.style.transform = "translate(0,0)"
             activeAbout = 0;
-        }, 0);
+        }, 500);
     })
 
     ac.appendChild(al)
@@ -355,7 +355,7 @@ function aboutPage() {
             activeAbout = 0;
     
             ai.classList.remove("active-about");
-        }, 0);
+        }, 500);
     })
 
     ac.appendChild(close)
