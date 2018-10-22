@@ -321,8 +321,11 @@ function aboutButton() {
         ai.classList.add("active-about");
 
         var anc = document.querySelector("#another");
-        anc.style.transform = "translate(0,0)"
-        activeAbout = 0;
+
+        setTimeout(() => {
+            anc.style.transform = "translate(0,0)"
+            activeAbout = 0;
+        }, 0);
     })
 
     ac.appendChild(al)
@@ -347,10 +350,12 @@ function aboutPage() {
         var ai = document.querySelector("#aic");
 
         var anc = document.querySelector("#another");
-        anc.style.transform = "translate(0,0)"
-        activeAbout = 0;
-
-        ai.classList.remove("active-about");
+        setTimeout(() => {
+            anc.style.transform = "translate(0,0)"
+            activeAbout = 0;
+    
+            ai.classList.remove("active-about");
+        }, 0);
     })
 
     ac.appendChild(close)
