@@ -54,13 +54,100 @@ var about = [{
 }, {
     text1: "Contact me",
     text2: "email me",
-},]
+}, ]
 
 const container = document.querySelector('.container');
 const header = createHeader();
 const projectContainer = createProjectContainer();
 var active = 0;
 var activeAbout = 0;
+
+let pageWidth = window.innerWidth || document.body.clientWidth;
+let treshold = Math.max(1, Math.floor(0.01 * (pageWidth)));
+let touchstartX = 0;
+let touchstartY = 0;
+let touchendX = 0;
+let touchendY = 0;
+
+const limit = Math.tan(45 * 1.5 / 180 * Math.PI);
+// const gestureZone = document.getElementById('modalContent');
+
+function handleGesture(e) {
+    var previousActive = active;
+    var divpl = document.getElementById("pl");
+    var aboutContainer = document.getElementById("aic")
+    var anotherContainer = document.getElementById("another")
+    let x = touchendX - touchstartX;
+    let y = touchendY - touchstartY;
+    let xy = Math.abs(x / y);
+    let yx = Math.abs(y / x);
+    if (Math.abs(x) > treshold || Math.abs(y) > treshold) {
+        if (yx <= limit) {
+            if (x < 0) {
+                console.log("left:" + active);
+                active++
+                if (active > main.works.length - 1)
+                    active = 0
+                activeAbout++
+                if (activeAbout > about.length - 1)
+                    activeAbout = about.length - 1
+                anotherContainer.style.transform = "translate(0,-" + (activeAbout * 100) + "%)"
+            } else {
+                console.log("right: " + active);
+                active--
+                if (active < 0)
+                    active = 0
+            }
+        }
+        if (xy <= limit) {
+            if (y < 0) {
+                console.log("top:" + active);
+                active++
+                if (active > main.works.length - 1)
+                    active = 0
+                activeAbout++
+                if (activeAbout > about.length - 1)
+                    activeAbout = about.length - 1
+                anotherContainer.style.transform = "translate(0,-" + (activeAbout * 100) + "%)"
+            } else {
+                console.log("bottom: " + active);
+                active--
+                if (active < 0)
+                    active = 0
+                activeAbout--
+                if (activeAbout < 0) {
+                    activeAbout = 0
+                }
+                anotherContainer.style.transform = "translate(0,-" + (activeAbout * 100) + "%)"
+            }
+        }
+
+        if (active !== previousActive) {
+            if (active === 0)
+                divpl.style.transform = "translate(20%)"
+            else
+                divpl.style.transform = "translate(-" + ((active * 50) - 20) + "%)"
+
+            if (active > previousActive) {
+                updateSlide("forward", active + 1)
+            } else {
+                updateSlide("down", active + 1)
+            }
+
+            setTimeout(() => {
+                hidePrevProject(previousActive)
+            }, 500);
+
+            setTimeout(() => {
+                showNextProject(active)
+            }, 500);
+        }
+
+
+    } else {
+        console.log("tap");
+    }
+}
 
 const debounce = (func, delay) => {
     let inDebounce
@@ -353,7 +440,7 @@ function aboutPage() {
         setTimeout(() => {
             anc.style.transform = "translate(0,0)"
             activeAbout = 0;
-    
+
             ai.classList.remove("active-about");
         }, 500);
     })
@@ -583,7 +670,7 @@ function init() {
     var pic = document.getElementById("project-image-container-0");
 
     pic.classList.add("o-1")
-    
+
     testArr.map((e) => {
         e.classList.add("active-title")
     })
@@ -609,6 +696,16 @@ function render() {
     window.addEventListener('load', function () {
         setScroll()
         setAboutScroll()
+        window.addEventListener('touchstart', function (event) {
+            touchstartX = event.changedTouches[0].screenX;
+            touchstartY = event.changedTouches[0].screenY;
+        }, false);
+
+        window.addEventListener('touchend', function (event) {
+            touchendX = event.changedTouches[0].screenX;
+            touchendY = event.changedTouches[0].screenY;
+            handleGesture(event);
+        }, false);
         about.map((el, idx) => {
             interactive(idx)
         })
@@ -620,7 +717,7 @@ function render() {
 render();
 
 $(document).keydown(function (objEvent) {
-    if (objEvent.keyCode == 9) {  //tab pressed
+    if (objEvent.keyCode == 9) { //tab pressed
         objEvent.preventDefault(); // stops its action
     }
 })

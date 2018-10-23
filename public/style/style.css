@@ -276,10 +276,11 @@ ul {
     -webkit-transition: all .5s;
     -moz-transition: all .5s;
     -o-transition: all .5s;
+    
 }
 
 .item-container>div:hover {
-    color: #a8b6bf;
+    transform: scale(.9)
 }
 
 .text-info {
