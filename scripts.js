@@ -56,21 +56,24 @@ var about = [{
     text2: "email me",
 }, ]
 
-const container = document.querySelector('.container');
-const header = createHeader();
-const projectContainer = createProjectContainer();
-var active = 0;
-var activeAbout = 0;
+const container = document.querySelector('.container'),
+    header = createHeader(),
+    projectContainer = createProjectContainer(),
+    limit = Math.tan(45 * 1.5 / 180 * Math.PI);
+var active = 0,
+    activeAbout = 0;
 
-let pageWidth = window.innerWidth || document.body.clientWidth;
-let treshold = Math.max(1, Math.floor(0.01 * (pageWidth)));
-let touchstartX = 0;
-let touchstartY = 0;
-let touchendX = 0;
-let touchendY = 0;
+var width = 100,
+    perfData = window.performance.timing, // The PerformanceTiming interface represents timing-related performance information for the given page.
+    EstimatedTime = -(perfData.loadEventEnd - perfData.navigationStart),
+    time = parseInt((EstimatedTime / 1000) % 60) * 50;
 
-const limit = Math.tan(45 * 1.5 / 180 * Math.PI);
-// const gestureZone = document.getElementById('modalContent');
+let pageWidth = window.innerWidth || document.body.clientWidth,
+    treshold = Math.max(1, Math.floor(0.01 * (pageWidth))),
+    touchstartX = 0,
+    touchstartY = 0,
+    touchendX = 0,
+    touchendY = 0;
 
 function handleGesture(e) {
     var previousActive = active;
@@ -749,15 +752,11 @@ function interactive(i) {
     // Track the mouse position relative to the center of the container.
     mouse.setOrigin(inner);
 
-    //-----------------------------------------
-
     var counter = 0;
     var updateRate = 10;
     var isTimeToUpdate = function () {
         return counter++ % updateRate === 0;
     };
-
-    //-----------------------------------------
 
     var onMouseEnterHandler = function (event) {
         update(event);
@@ -772,8 +771,6 @@ function interactive(i) {
             update(event);
         }
     };
-
-    //-----------------------------------------
 
     var update = function (event) {
         mouse.updatePosition(event);
@@ -792,9 +789,42 @@ function interactive(i) {
         //   inner.style.oTransform = style;
     };
 
-    //-----------------------------------------
-
     inner.onmouseenter = onMouseEnterHandler;
     inner.onmouseleave = onMouseLeaveHandler;
     inner.onmousemove = onMouseMoveHandler;
 };
+
+// Loadbar Animation
+$(".loadbar").animate({
+    width: width + "%"
+}, time);
+
+// Percentage Increment Animation
+var PercentageID = $("#precent"),
+    start = 0,
+    end = 100,
+    durataion = time;
+animateValue(PercentageID, start, end, durataion);
+
+function animateValue(id, start, end, duration) {
+
+    var range = end - start,
+        current = start,
+        increment = end > start ? 1 : -1,
+        stepTime = Math.abs(Math.floor(duration / range)),
+        obj = $(id);
+
+    var timer = setInterval(function () {
+        current += increment;
+        $(obj).text(current + "%");
+        //obj.innerHTML = current;
+        if (current == end) {
+            clearInterval(timer);
+        }
+    }, stepTime);
+}
+
+// Fading Out Loadbar on Finised
+setTimeout(function () {
+    $('.preloader-wrap').fadeOut(500);
+}, time);
