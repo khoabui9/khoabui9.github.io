@@ -613,7 +613,7 @@ function setScroll() {
         functionCall: false
     };
     var scrollTimer = false;
-    projectContainer.addEventListener("wheel", e => {
+    window.addEventListener("wheel", e => {
         var previousActive = active;
         var divpl = document.getElementById("pl");
         scrollStatus.wheeling = true;
