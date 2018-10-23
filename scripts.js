@@ -53,7 +53,7 @@ var about = [{
     text4: "and travel",
 }, {
     text1: "Contact me",
-    text2: "email me",
+    text2: "khoa.buigia0212@gmail.com",
 }, ]
 
 const container = document.querySelector('.container'),
