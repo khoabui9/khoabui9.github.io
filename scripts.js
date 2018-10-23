@@ -33,12 +33,12 @@ var main = {
         title: 'project palm',
         description: 'The Hoxton Paris is opening its doors on Rue du Sentier in Paris’s second arrondissement.',
         category: 'Full-service',
-        image: './public/image/project-palm.jpg'
+        image: './public/image/project-green.jpg'
     }, {
         title: 'project green',
         description: 'We decided to rethink everything, including our messaging approach, site structure, and UX. We crafted both copy and visuals from scratch in just a few months.',
         category: 'Full-service',
-        image: './public/image/project-green.jpg'
+        image: './public/image/project-palm.jpg'
     }]
 }
 
