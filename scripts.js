@@ -400,7 +400,7 @@ function aboutButton() {
 
     var s = document.createElement('span')
     s.classList.add(...span);
-    s.innerHTML = "about / contact"
+    s.innerHTML = "about"
 
     al.appendChild(s)
     al.addEventListener("click", () => {
