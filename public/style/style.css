@@ -280,6 +280,7 @@ ul {
 }
 
 .item-container>div:hover {
+    color: rgb(54, 51, 221);
     transform: scale(.9)
 }
 
