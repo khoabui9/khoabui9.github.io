@@ -129,7 +129,7 @@ ul {
 
 .view-more-text {
     transform: translate(-5%, calc(100vh/5));
-    font-size: calc(6px + 30 * (100vw - 320px) / 1120);
+    font-size: calc(6px + 15 * (100vw - 320px) / 1120);
 }
 
 .link {
