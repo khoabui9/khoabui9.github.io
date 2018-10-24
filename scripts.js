@@ -24,25 +24,25 @@ var main = {
         description: 'We work on conceptualizing, designing, developing, and testing. We produce content for almost all ProjectWave pages a user sees prior to signing up and when logging in.',
         category: 'Full-service',
         link: "https://github.com/khoabui9/chat",
-        image: './public/image/github.png'
+        image: './public/image/chat.jpg'
     }, {
         title: 'Android App',
         description: 'Ce bac de rangement est un objet éco-conçu pour l’enseigne d’ameublement et de décoration Maison du Monde.',
         category: 'Full-service',
         link: "https://github.com/khoabui9/rl2018",
-        image: './public/image/github.png'
+        image: './public/image/android.jpg'
     }, {
         title: 'Bike booking',
         description: 'The Hoxton Paris is opening its doors on Rue du Sentier in Paris’s second arrondissement.',
         category: 'Full-service',
         link: "https://github.com/khoabui9/bike-booking",
-        image: './public/image/github.png'
+        image: './public/image/bike.jpg'
     }, {
         title: 'jobtag',
         description: 'We decided to rethink everything, including our messaging approach, site structure, and UX. We crafted both copy and visuals from scratch in just a few months.',
         category: 'Full-service',
         link: "https://github.com/khoabui9/jobtag",
-        image: './public/image/github.png'
+        image: './public/image/job.jpg'
     }]
 }
 
