@@ -91,7 +91,7 @@ function handleGesture(e) {
     if (Math.abs(x) > treshold || Math.abs(y) > treshold) {
         if (yx <= limit) {
             if (x < 0) {
-                console.log("left:" + active);
+                // console.log("left:" + active);
                 active++
                 if (active > main.works.length - 1)
                     active = 0
@@ -100,7 +100,7 @@ function handleGesture(e) {
                     activeAbout = about.length - 1
                 anotherContainer.style.transform = "translate(0,-" + (activeAbout * 100) + "%)"
             } else {
-                console.log("right: " + active);
+                // console.log("right: " + active);
                 active--
                 if (active < 0)
                     active = 0
@@ -108,7 +108,7 @@ function handleGesture(e) {
         }
         if (xy <= limit) {
             if (y < 0) {
-                console.log("top:" + active);
+                // console.log("top:" + active);
                 active++
                 if (active > main.works.length - 1)
                     active = 0
@@ -117,7 +117,7 @@ function handleGesture(e) {
                     activeAbout = about.length - 1
                 anotherContainer.style.transform = "translate(0,-" + (activeAbout * 100) + "%)"
             } else {
-                console.log("bottom: " + active);
+                // console.log("bottom: " + active);
                 active--
                 if (active < 0)
                     active = 0
@@ -518,14 +518,14 @@ function setAboutScroll() {
         if (!scrollStatus.functionCall) {
             const delta = e.detail ? e.detail * (-120) : e.wheelDelta;
             if (delta < 0) {
-                console.log('scrolled down: ' + delta)
+                // console.log('scrolled down: ' + delta)
                 activeAbout++
                 if (activeAbout > about.length - 1)
                     activeAbout = about.length - 1
                 anotherContainer.style.transform = "translate(0,-" + (activeAbout * 100) + "%)"
             }
             if (delta > 0) {
-                console.log('scrolled up: ' + delta)
+                // console.log('scrolled up: ' + delta)
                 activeAbout--
                 if (activeAbout < 0) {
                     activeAbout = 0
@@ -642,14 +642,14 @@ function setScroll() {
         if (!scrollStatus.functionCall) {
             const delta = e.detail ? e.detail * (-120) : e.wheelDelta;
             if (delta < 0) {
-                console.log('scrolled down: ' + delta)
+                // console.log('scrolled down: ' + delta)
                 active++
                 if (active > main.works.length - 1)
                     active = main.works.length - 1
                 // divpl.style.transform = "translate(-" + ((active * 50)-20) + "%)"
             }
             if (delta > 0) {
-                console.log('scrolled up: ' + delta)
+                // console.log('scrolled up: ' + delta)
                 active--
                 if (active < 0) {
                     active = 0
