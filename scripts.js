@@ -20,25 +20,29 @@ var main = {
         }]
     },
     works: [{
-        title: 'project wave',
+        title: 'Chat App',
         description: 'We work on conceptualizing, designing, developing, and testing. We produce content for almost all ProjectWave pages a user sees prior to signing up and when logging in.',
         category: 'Full-service',
-        image: './public/image/project-wave.jpg'
+        link: "https://github.com/khoabui9/chat",
+        image: './public/image/github.png'
     }, {
-        title: 'project sand',
+        title: 'Android App',
         description: 'Ce bac de rangement est un objet éco-conçu pour l’enseigne d’ameublement et de décoration Maison du Monde.',
         category: 'Full-service',
-        image: './public/image/project-sand.jpg'
+        link: "https://github.com/khoabui9/rl2018",
+        image: './public/image/github.png'
     }, {
-        title: 'project palm',
+        title: 'Bike booking',
         description: 'The Hoxton Paris is opening its doors on Rue du Sentier in Paris’s second arrondissement.',
         category: 'Full-service',
-        image: './public/image/project-green.jpg'
+        link: "https://github.com/khoabui9/bike-booking",
+        image: './public/image/github.png'
     }, {
-        title: 'project green',
+        title: 'jobtag',
         description: 'We decided to rethink everything, including our messaging approach, site structure, and UX. We crafted both copy and visuals from scratch in just a few months.',
         category: 'Full-service',
-        image: './public/image/project-palm.jpg'
+        link: "https://github.com/khoabui9/jobtag",
+        image: './public/image/github.png'
     }]
 }
 
@@ -250,8 +254,20 @@ function createProjectTitle(title, idx) {
 
 
 function createImage(src, idx) {
+    var a = ["project-link", "full"]
+    var leuleu = ["leu", "full"]
     var ic = ["project-image-container", "full"]
     var pi = ["project-image"]
+
+    var al = document.createElement('a')
+    al.classList.add(...a)
+    al.id = "project-link-" + idx
+    al.target = "_blank"
+    al.href = src.link
+
+    var leu = document.createElement('div')
+    leu.classList.add(...leuleu)
+    leu.id = "leu-" + idx
 
     var projectImageContainer = document.createElement('div')
     projectImageContainer.classList.add(...ic)
@@ -260,11 +276,13 @@ function createImage(src, idx) {
     var projectImage = document.createElement('img')
     projectImage.classList.add(...pi)
     projectImage.id = "project-image-" + idx
-    projectImage.src = src
+    projectImage.src = src.image
 
     projectImageContainer.appendChild(projectImage)
+    al.appendChild(projectImageContainer)
+    al.appendChild(leu)
 
-    return projectImageContainer;
+    return al;
 }
 
 function createProgressBar() {
@@ -377,7 +395,8 @@ function viewmore() {
 
     var link = document.createElement('a')
     link.className = "link"
-    link.href = "#"
+    link.href = "https://github.com/khoabui9"
+    link.target = "_blank"
 
     var vmt = document.createElement('p')
     vmt.classList.add(...vmtext);
@@ -572,7 +591,7 @@ function renderProjectInfo() {
     var html = projectList.map((el, idx) => {
         var project = createProject(idx);
         var title = createProjectTitle(el.title, idx);
-        var image = createImage(el.image, idx);
+        var image = createImage(el, idx);
 
         project.appendChild(image)
         project.appendChild(title)
@@ -626,7 +645,7 @@ function setScroll() {
                 console.log('scrolled down: ' + delta)
                 active++
                 if (active > main.works.length - 1)
-                    active = 0
+                    active = main.works.length - 1
                 // divpl.style.transform = "translate(-" + ((active * 50)-20) + "%)"
             }
             if (delta > 0) {

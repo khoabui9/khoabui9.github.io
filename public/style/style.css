@@ -22,7 +22,11 @@ html {
 .logo {
     display: inline-block;
     font-weight: 400;
-    font-size: 37px;
+    font-size: calc(10px + 20 * (100vw - 320px) / 1120);
+}
+
+a {
+    cursor: pointer;
 }
 
 ol,
@@ -131,6 +135,12 @@ ul {
     color: black;
 }
 
+.leu {
+    position: absolute;
+    background-color: grey;
+    opacity: .4;
+}
+
 .project-image-container {
     position: absolute;
     opacity: .6;
@@ -193,6 +203,7 @@ ul {
 
 .current-step {
     font-weight: 600;
+    font-size: calc(4px + 15 * (100vw - 320px) / 1120);
 }
 
 .active-title {
@@ -207,8 +218,8 @@ ul {
 }
 
 .counter-num {
-    font-size: calc(40px + 66 * (100vw - 320px) / 1120);
-    line-height: 4rem;
+    font-size: calc(30px + 50 * (100vw - 320px) / 1120);
+    line-height: calc(20px + 50 * (100vw - 320px) / 1120);
     font-family: 'Cinzel', serif;
 }
 
@@ -216,7 +227,7 @@ ul {
     text-decoration: none;
     list-style: none;
     color: black;
-    font-size: calc(1px + 66 * (100vw - 320px) / 1120);
+    font-size: calc(4px + 15 * (100vw - 320px) / 1120) !important;
 }
 
 .social-container {
@@ -319,7 +330,7 @@ ul {
     text-align:center;
     color: black;
     line-height: 30px;
-    font-size : 30px;
+    font-size: calc(10px + 20 * (100vw - 320px) / 1120);
   }
   
   .loader,
