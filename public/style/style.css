@@ -101,7 +101,9 @@ ul {
 }
 
 .project-container {
-    height: 50%;
+    height: 55%;
+    background-color: beige;
+    padding: 1%;
 }
 
 .project-list {
