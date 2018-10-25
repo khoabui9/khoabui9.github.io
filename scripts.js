@@ -716,21 +716,6 @@ function render() {
     container.appendChild(aboutPage())
 
     window.addEventListener('load', function () {
-        setScroll()
-        setAboutScroll()
-        window.addEventListener('touchstart', function (event) {
-            touchstartX = event.changedTouches[0].screenX;
-            touchstartY = event.changedTouches[0].screenY;
-        }, false);
-
-        window.addEventListener('touchend', function (event) {
-            touchendX = event.changedTouches[0].screenX;
-            touchendY = event.changedTouches[0].screenY;
-            handleGesture(event);
-        }, false);
-        about.map((el, idx) => {
-            interactive(idx)
-        })
         // Loadbar Animation
         $(".loadbar").animate({
             width: width + "%"
@@ -766,9 +751,24 @@ function render() {
             $('.preloader-wrap').fadeOut(500);
         }, time);
 
-    })
+        init();
 
-    init();
+        setScroll()
+        setAboutScroll()
+        window.addEventListener('touchstart', function (event) {
+            touchstartX = event.changedTouches[0].screenX;
+            touchstartY = event.changedTouches[0].screenY;
+        }, false);
+
+        window.addEventListener('touchend', function (event) {
+            touchendX = event.changedTouches[0].screenX;
+            touchendY = event.changedTouches[0].screenY;
+            handleGesture(event);
+        }, false);
+        about.map((el, idx) => {
+            interactive(idx)
+        })
+    })
 }
 
 render();
