@@ -294,7 +294,7 @@ ul {
 }
 
 .item-container>div:hover {
-    color: rgb(28, 60, 119);
+    color: #72cdfa;
     transform: scale(.9)
 }
 
