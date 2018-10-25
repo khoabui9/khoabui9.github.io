@@ -70,7 +70,7 @@ var active = 0,
 var width = 100,
     perfData = window.performance.timing, // The PerformanceTiming interface represents timing-related performance information for the given page.
     EstimatedTime = -(perfData.loadEventEnd - perfData.navigationStart),
-    time = parseInt((EstimatedTime / 1000) % 60) * 50;
+    time = parseInt((EstimatedTime / 1000) % 60) * 100;
 
 let pageWidth = window.innerWidth || document.body.clientWidth,
     treshold = Math.max(1, Math.floor(0.01 * (pageWidth))),
