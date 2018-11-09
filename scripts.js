@@ -20,6 +20,12 @@ var main = {
         }]
     },
     works: [{
+        title: 'React Store',
+        description: 'We work on conceptualizing, designing, developing, and testing. We produce content for almost all ProjectWave pages a user sees prior to signing up and when logging in.',
+        category: 'Full-service',
+        link: "https://github.com/khoabui9/react-store",
+        image: './public/image/store.png'
+    }, {
         title: 'Chat App',
         description: 'We work on conceptualizing, designing, developing, and testing. We produce content for almost all ProjectWave pages a user sees prior to signing up and when logging in.',
         category: 'Full-service',
