@@ -15,7 +15,7 @@
       #valentineQuestion {
         font-size: 50px;
         margin: 20px;
-        color:#b58670	
+        color: #b58670;
       }
 
       .answerButton {
@@ -45,7 +45,11 @@
         transition: all 0.3s ease-in-out;
       }
 
-      .answerButton:hover {
+      #yesButton {
+        font-size: 40px;
+      }
+
+      .answerButton:not(#noButton):hover {
         background-color: #ff4d6d; /* Vibrant pink */
         color: white;
         border: 3px solid #ff99cc; /* Softer pink border */
@@ -80,7 +84,7 @@
     >
       Yes
     </button>
-    <button class="answerButton" id="noButton">
+    <button class="no answerButton" id="noButton">
       No No will not, I'm too cool for love 😎 (╯°□°）╯︵ ┻━┻
     </button>
     <br />
