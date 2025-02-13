@@ -23,48 +23,46 @@
         animation: pulse 2s infinite alternate;
       }
 
-      /* Updated Dropdown Styling */
-      select {
-        font-size: 18px;
-        padding: 12px 15px;
-        border-radius: 12px;
-        border: none;
-        background: white;
-        color: #ff1493;
+      p {
+        font-size: 20px;
+      }
+
+      .option-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 20px;
+        padding: 10px;
+      }
+
+      .option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         cursor: pointer;
-        outline: none;
-        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15);
-        transition: all 0.3s ease-in-out;
-        appearance: none; /* Hide default dropdown arrow */
-        width: 250px;
-        text-align: center;
+        transition: transform 0.2s;
+        gap: 10px;
+        flex-grow: 1;
       }
 
-      select:hover {
-        background: #ffe6f2;
-        transform: scale(1.05);
+      .option img {
+        width: 120px;
+        height: 100px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+        object-fit: cover;
       }
 
-      select:focus {
-        background: #ffccdd;
-        border: 2px solid #ff69b4;
+      .option:hover img {
+        transform: scale(1.1);
       }
 
-      /* Custom Arrow for Dropdown */
-      .dropdown-wrapper {
-        position: relative;
-        display: inline-block;
-      }
-
-      .dropdown-wrapper::after {
-        content: "▼";
-        font-size: 14px;
-        color: #ff1493;
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        pointer-events: none;
+      .option.active img {
+        border: 2px solid #ff1493;
+        -webkit-box-shadow: 0px 0px 25px 4px rgba(232, 232, 232, 0.9);
+        -moz-box-shadow: 0px 0px 25px 4px rgba(232, 232, 232, 0.9);
+        box-shadow: 0px 0px 25px 4px rgba(232, 232, 232, 0.9);
       }
 
       .button {
@@ -76,6 +74,7 @@
         background-color: #ff1493;
         color: white;
         transition: transform 0.2s, background-color 0.3s;
+        margin-top: 20px;
       }
 
       .button:hover {
@@ -89,24 +88,6 @@
         margin-top: 20px;
         color: #fff;
         text-shadow: 1px 1px 5px #ff69b4;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-
-      @keyframes pulse {
-        from {
-          text-shadow: 0px 0px 10px #ff66b2;
-        }
-        to {
-          text-shadow: 0px 0px 20px #ff1493;
-        }
       }
 
       /* Floating Hearts Animation */
@@ -128,28 +109,39 @@
         }
       }
 
-      .answerButton {
-        padding: 12px 24px;
-        font-size: 18px;
-        cursor: pointer;
-        margin: 10px;
-        font-family: "Courier", cursive;
-        font-weight: bold;
-        margin-bottom: 20px;
-        background-color: #ffdbf9; /* Soft pink */
-        color: #ff4d6d; /* Cute strawberry red */
-        border-radius: 20px;
-        border: 3px solid #ffb3d9; /* Soft pastel pink border */
-        box-shadow: 2px 2px 6px rgba(255, 77, 109, 0.4);
-        transition: all 0.3s ease-in-out;
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
       }
 
-      .answerButton:hover {
-        background-color: #ff4d6d; /* Vibrant pink */
-        color: white;
-        border: 3px solid #ff99cc; /* Softer pink border */
-        box-shadow: 0px 0px 10px rgba(255, 77, 109, 0.8);
-        transform: scale(1.1);
+      .modal-content {
+        background-color: #ff99cc;
+        color: #333;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 10px;
+        width: 60%;
+        text-align: center;
+        box-shadow: 0px 0px 20px rgba(255, 20, 147, 0.5);
+      }
+
+      .close {
+        color: #ff1493;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        float: right;
+      }
+
+      .close:hover {
+        color: #ff69b4;
       }
     </style>
   </head>
@@ -158,69 +150,173 @@
       <h1>Let's Plan Our Date! 🥰</h1>
 
       <p>What do you want to do? 🎉</p>
-      <div class="dropdown-wrapper">
-        <select id="activity">
-          <option>🏯 Ăn sáng cà phê</option>
-          <option>🌆 Cháy phố</option>
-          <option>🎭 mua ps5</option>
-          <option>🏍️ mua pokemon cards</option>
-          <option>🌅 cafe capybara</option>
-          <option>
-            🌅 cafe sau nha (dc: 6 le thanh tong - no free marketing)
-          </option>
-          <option>🌸 mua bể cá</option>
-          <option>🤷‍♂️ Anything</option>
-        </select>
+      <div class="option-container" id="activityOptions">
+        <div
+          class="option"
+          onclick="selectOption('activity',this, '🏯 Ăn sáng cà phê')"
+        >
+          <img src="./media/coffee.webp" alt="Coffee Breakfast" />
+          <span>🏯 Ăn sáng cà phê</span>
+        </div>
+        <div
+          class="option"
+          onclick="selectOption('activity',this, '🌆 Cháy phố')"
+        >
+          <img src="./media/chaypho.webp" alt="City Walk" />
+          <span>🌆 Cháy phố</span>
+        </div>
+        <div
+          class="option"
+          onclick="selectOption('activity',this, '🎭 mua ps5')"
+        >
+          <img src="./media/ps5.webp" alt="Movie" />
+          <span>🎭 mua ps5</span>
+        </div>
+        <div
+          class="option"
+          onclick="selectOption('activity',this, '🏍️ mua pokemon cards')"
+        >
+          <img src="./media/pokemon.webp" alt="Bike Trip" />
+          <span>🏍️ pokemon cards</span>
+        </div>
+        <div
+          class="option"
+          onclick="selectOption('activity',this, '🌅 cafe capybara')"
+        >
+          <img src="./media/capybara.webp" alt="Bike Trip" />
+          <span>🌅 cafe capybara</span>
+        </div>
+        <div
+          class="option"
+          onclick="selectOption('activity',this, '🌸 mua bể cá')"
+        >
+          <img src="./media/fish.webp" alt="Bike Trip" />
+          <span>🌸 mua bể cá</span>
+        </div>
+        <div
+          class="option"
+          onclick="selectOption('activity',this, '🤷‍♂️ Anything')"
+        >
+          <img src="./media/anything.webp" alt="Bike Trip" />
+          <span>🤷‍♂️ Anything</span>
+        </div>
       </div>
 
       <p>What do you want to eat? 🍽️</p>
-      <div class="dropdown-wrapper">
-        <select id="food">
-          <option>🍜 Phở Bò (Beef Pho)</option>
-          <option>🍲 Bún Chả (Grilled Pork Noodles)</option>
-          <option>🦀 Bún Riêu Cua (Crab Noodle Soup)</option>
-          <option>🥩 Steak</option>
-          <option>🍜 Ramen</option>
-          <option>🍣 Sushi</option>
-          <option>🍕 Korean food</option>
-          <option>🤷‍♂️ Anything</option>
-        </select>
+      <div class="option-container" id="foodOptions">
+        <div class="option" onclick="selectOption('food',this, '🍜 Phở Bò')">
+          <img src="./media/phobo.webp" alt="Pho Bo" />
+          <span>🍜 Phở Bò</span>
+        </div>
+        <div class="option" onclick="selectOption('food',this, '🍲 Bún Chả')">
+          <img src="./media/buncha.webp" alt="Bun Cha" />
+          <span>🍲 Bún Chả</span>
+        </div>
+        <div class="option" onclick="selectOption('food',this, '🍣 Sushi')">
+          <img src="./media/sushi.webp" alt="Sushi" />
+          <span>🍣 Sushi</span>
+        </div>
+        <div class="option" onclick="selectOption('food',this, '🍕 Pizza 4p')">
+          <img src="./media/pizza4p.webp" alt="Pizza" />
+          <span>🍕 Pizza 4p</span>
+        </div>
+        <div class="option" onclick="selectOption('food',this, '🍜 Ramen')">
+          <img src="./media/ramen.webp" alt="Pizza" />
+          <span>🍜 Ramen</span>
+        </div>
+        <div class="option" onclick="selectOption('food',this, '🥩 Steak')">
+          <img src="./media/steak.webp" alt="Pizza" />
+          <span>🥩 Steak</span>
+        </div>
+        <div
+          class="option"
+          onclick="selectOption('food',this, '🥩 korean bbq')"
+        >
+          <img src="./media/koreanbbq.webp" alt="Pizza" />
+          <span>🥩 korean bbq</span>
+        </div>
+        <div class="option" onclick="selectOption('food',this, '🤷‍♂️ Anything')">
+          <img src="./media/anything.webp" alt="Bike Trip" />
+          <span>🤷‍♂️ Anything</span>
+        </div>
       </div>
 
       <p>What do you want to drink? 🥤</p>
-      <div class="dropdown-wrapper">
-        <select id="drink">
-          <option>🧋 tà tưa</option>
-          <option>🥭 trà mơ</option>
-          <option>🥤 nc ép</option>
-          <option>🍹 matcha</option>
-          <option>🤷‍♂️ Anything</option>
-        </select>
+      <div class="option-container" id="drinkOptions">
+        <div class="option" onclick="selectOption('drink',this, '🧋 tà tưa')">
+          <img src="./media/trasua.webp" alt="Bubble Tea" />
+          <span>🧋 tà tưa</span>
+        </div>
+        <div
+          class="option"
+          onclick="selectOption('drink',this, '🥭 trà mơ hương thảo')"
+        >
+          <img src="./media/tramohuongthao.webp" alt="Apricot Tea" />
+          <span>🥭 trà mơ hương thảo</span>
+        </div>
+        <div class="option" onclick="selectOption('drink',this, '🥤 Nước ép')">
+          <img src="./media/ncep.webp" alt="Mocktail" />
+          <span>🥤 Nước ép</span>
+        </div>
+        <div class="option" onclick="selectOption('drink',this, '🍹 Matcha')">
+          <img src="./media/matcha.webp" alt="Coffee" />
+          <span>🍹 Matcha</span>
+        </div>
+        <div
+          class="option"
+          onclick="selectOption('drink', this, '🤷‍♂️ Anything')"
+        >
+          <img src="./media/anything.webp" alt="Bike Trip" />
+          <span>🤷‍♂️ Anything</span>
+        </div>
       </div>
 
       <br /><br />
-      <button class="button answerButton" onclick="showDatePlan()">
-        Confirm Date 💖
-      </button>
-
-      <p id="result"></p>
-
-      <button class="button answerButton" onclick="location.href='index.html'">
-        Back to Home
-      </button>
+      <button class="button" onclick="showDatePlan()">Confirm Date 💖</button>
     </div>
-
+    <!-- Modal Structure -->
+    <div id="dateModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Our Date Plan 💕</h2>
+        <p id="result"></p>
+      </div>
+    </div>
     <script>
+      let selections = { activity: "", food: "", drink: "" };
+
+      function selectOption(category, element, choice) {
+        selections[category] = choice;
+
+        let options = element.parentElement.getElementsByClassName("option");
+        for (let opt of options) {
+          opt.classList.remove("active");
+        }
+        element.classList.add("active");
+      }
+
       function showDatePlan() {
-        const activity = document.getElementById("activity").value;
-        const food = document.getElementById("food").value;
-        const drink = document.getElementById("drink").value;
+        if (!selections.activity || !selections.food || !selections.drink) {
+          alert("Please select an option for each category!");
+          return;
+        }
 
         document.getElementById(
           "result"
-        ).innerHTML = `💕 Our Hanoi date is set! First, we'll ${activity}, 
-            then enjoy some delicious ${food}, and finally, we'll sip on ${drink} together! 🥰`;
+        ).innerHTML = `💕 Our Hanoi date is set! First, we'll ${selections.activity}, then enjoy some delicious ${selections.food}, and finally, we'll sip on ${selections.drink} together! 🥰`;
+        document.getElementById("dateModal").style.display = "block";
       }
+
+      function closeModal() {
+        document.getElementById("dateModal").style.display = "none";
+      }
+
+      window.onclick = function (event) {
+        let modal = document.getElementById("dateModal");
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
 
       function createHeart() {
         const heart = document.createElement("div");
